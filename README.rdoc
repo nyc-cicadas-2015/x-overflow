@@ -1,6 +1,7 @@
-<h1> X-Overflow </h1>
+# X-Overflow
 
-<h2>a project created by: Dian, Domingo, Julianna</h2>
+a project created by: Dian, Domingo, Julianna
+=============================================
 
 <h4>User Stories:</h4>
 As a logged in user I can:
