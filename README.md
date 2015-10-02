@@ -1,9 +1,8 @@
 # X-Overflow
 
-a project created by: Dian, Domingo, Julianna
-=============================================
+## a project created by: Dian, Domingo, Julianna
 
-<h4>User Stories:</h4>
+#### User Stories:
 As a logged in user I can:
 - post a question
 - edit my question
