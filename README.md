@@ -2,6 +2,8 @@
 
 ## a project created by: Dian, Domingo, Julianna
 
+[![Circle CI](https://circleci.com/gh/nyc-cicadas-2015/x-overflow.svg?style=svg)](https://circleci.com/gh/nyc-cicadas-2015/x-overflow)
+
 [Trello Board](https://trello.com/b/zbj6LnL4)
 #### User Stories:
 As a logged in user I can:
