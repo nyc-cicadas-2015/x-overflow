@@ -65,7 +65,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title), :content)
+    params.require(:question).permit(:text)
   end
 
   def find_question
