@@ -17,6 +17,17 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    it "render the show view" do
+      get :show, id: question
+      expect(response).to render_template :show
+    end
+
+    it "located the requested question" do
+      get :show, id: question
+      expect(assigns(:question)).to eq(question)
+    end
+  end
 
 
 end
