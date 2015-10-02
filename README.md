@@ -2,6 +2,7 @@
 
 ## a project created by: Dian, Domingo, Julianna
 
+[Trello Board](https://trello.com/b/zbj6LnL4)
 #### User Stories:
 As a logged in user I can:
 - post a question
