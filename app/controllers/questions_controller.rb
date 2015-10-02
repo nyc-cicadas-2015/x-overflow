@@ -46,6 +46,34 @@ class QuestionsController < ApplicationController
 
   end
 
+  def edit
+  end
 
+  def update
+    if @question.update_attributes(question_params)
+      redirect_to question_path(@question)
+    else
+      redirect_to edit_question_path(@question), flash: {error: "Your question must include both a title & content"}
+    end
+  end
+
+  def destroy
+    @question.destroy
+    redirect_to root_path
+  end
+
+  private
+
+  def question_params
+    params.require(:question).permit(:title), :content)
+  end
+
+  def find_question
+    @question = Question.find(params[:id])
+  end
+
+  def authenticate_user
+    redirect_to root_path if !current_user
+  end
 
 end
