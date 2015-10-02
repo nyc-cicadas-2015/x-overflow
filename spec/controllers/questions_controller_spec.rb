@@ -66,7 +66,7 @@ RSpec.describe QuestionsController, type: :controller do
     context "invalid attributes" do
       it "doesn't create a post with invalid attributes" do
         log_in(FactoryGirl.create(:user))
-        question_attributes = { title: "Title", content: nil }
+        question_attributes = { text: nil }
         post :create, question: question_attributes
         expect(response).to redirect_to new_question_path
       end
@@ -88,5 +88,52 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to redirect_to root_path
     end
   end
+
+  describe "PUT #update" do
+    before :each do
+      @question = FactoryGirl.create(:question, text: "Text")
+    end
+
+    context "valid attributes" do
+      it "located the specific question" do
+        put :update, id: @question
+        expect(assigns(:question)).to eq(@question)
+      end
+
+      it "changes the question's attributes" do
+        log_in(user)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: "Updated text")
+        @question.reload
+        expect(@question.text).to eq("Updated text")
+      end
+
+      it "redirects to the updated question" do
+        log_in(user)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "invalid attributes" do
+      it "locates the requested question" do
+        put :update, id: @question
+        expect(assigns(:question)).to eq(@question)
+      end
+
+      it "does not change the the question's attributes" do
+        log_in(user)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: nil)
+        @question.reload
+        expect(@question.text).to eq("Text")
+      end
+
+      it "redirects to the edit view" do
+        log_in(user)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: nil)
+        expect(response).to redirect_to edit_question_path(@question)
+      end
+    end
+  end
+
 
 end
