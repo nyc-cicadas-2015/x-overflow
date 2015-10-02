@@ -42,5 +42,30 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "POST #create" do
+    context "valid attributes" do
+      it "redirects to root if not logged in" do
+        post :create, question: FactoryGirl.attributes_for(:question)
+        expect(response).to redirect_to root_path
+      end
+
+      it "creates a new question" do
+        log_in(user)
+        question_attributes = FactoryGirl.attributes_for(:question)
+        post :create, question: question_attributes
+        expect(Question.last).to have_attributes question_attributes
+      end
+
+      it "redirects to a new question's show view page" do
+        log_in(user)
+        post :create, question: FactoryGirl.attributes_for(:question)
+        expect(response).to redirect_to(question_path(Question.last))
+      end
+    end
+
+    context "invalid attributes" do
+      it "doesn't create a post with invalid attributes" do
+        log_in(FactoryGirl.create )
+  end
 
 end
