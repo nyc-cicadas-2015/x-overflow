@@ -26,13 +26,4 @@ describe AnswersController do
     end
   end
 
-  context "#create" do
-    it "with valid attributes" do
-      expect {
-        post :create, :answer => attributes_for(:answer)
-        expect(response).to be_redirect
-      }.to change {Answer.count}.by(1)
-    end
-  end
-
 end
