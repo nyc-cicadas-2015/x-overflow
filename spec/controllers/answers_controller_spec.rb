@@ -14,5 +14,11 @@ describe AnswersController do
     end
   end
 
+  context "#show" do
+    it "is successful" do
+      get :show, :id => answer.id
+      expect(response).to be_success
+    end
+  end
 
 end
