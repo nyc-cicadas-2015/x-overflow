@@ -135,5 +135,41 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "DELETE #destroy" do
+    before :each do
+      @question = FactoryGirl.create(:question)
+    end
+
+    it "redirects to the root page if not logged in" do
+      delete :destroy, id: @question
+      expect(response).to redirect_to root_path
+    end
+
+    it "does not delete question when not logged in" do
+      expect(
+        delete :destroy, id: @question
+        ).not_to change(Question, :count)
+    end
+
+    it "located the requested question" do
+      log_in(user)
+      delete :destroy, id: @question
+      expect(assigns(:question)).to eq(@question)
+    end
+
+    it "deletes the question" do
+      log_in(user)
+      expect(
+        delete :destroy, id: @question
+        ).to change(Question, :count).by(-1)
+    end
+
+    it "redirects to home page when the question is deleted" do
+      log_in(user)
+      delete :destroy, id: @question
+      expect(response).to redirect_to(root_path)
+    end
+  end
+
 
 end
