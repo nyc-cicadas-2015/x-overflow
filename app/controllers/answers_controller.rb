@@ -5,6 +5,6 @@ class AnswersController < ApplicationController
   end
 
   def show
-    @answer = Answer.new
+    @answer = Answer.find params[:id]
   end
 end

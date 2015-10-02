@@ -19,6 +19,11 @@ describe AnswersController do
       get :show, :id => answer.id
       expect(response).to be_success
     end
+
+    it "assigns @answer to answer" do
+      get :show, :id => answer.id
+      expect(assigns(:answer)).to eq answer
+    end
   end
 
 end
