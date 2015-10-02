@@ -24,5 +24,3 @@ As any user I can:
 - filter questions by highest voted
 - filter questions by "trending"
 - see answers by "best answer" followed by highest voted
-
-
