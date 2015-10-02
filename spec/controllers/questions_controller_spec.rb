@@ -65,7 +65,28 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "invalid attributes" do
       it "doesn't create a post with invalid attributes" do
-        log_in(FactoryGirl.create )
+        log_in(FactoryGirl.create(:user))
+        question_attributes = { title: "Title", content: nil }
+        post :create, question: question_attributes
+        expect(response).to redirect_to new_question_path
+      end
+    end
+  end
+
+  describe "GET #edit" do
+    it "renders an edit when logged in" do
+      log_in(user)
+      get :edit, id: question
+      expect(response).to render_template :edit
+    end
+    it "located the requested question" do
+      get :edit, id: question
+      expect(assigns(:question)).to eq(question)
+    end
+    it "redirects to the home page if not logged in" do
+      get :edit, id: question
+      expect(response).to redirect_to root_path
+    end
   end
 
 end
