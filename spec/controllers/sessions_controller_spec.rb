@@ -22,6 +22,9 @@ describe SessionsController do
         expect(session[:user_id]).to eq @user.id
       end
 
+      it 'triggers a flash message welcoming user' do
+        expect(flash[:message]).to have_content "Welcome #{@user.username}"
+      end
 
 
     end
