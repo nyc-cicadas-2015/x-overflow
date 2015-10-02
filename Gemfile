@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -42,7 +42,7 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'factory_girl_rails'
-  gem 'rspec_rails'
+  gem 'rspec-rails'
   gem 'faker'
   gem 'database_cleaner'
 end
