@@ -25,9 +25,17 @@ describe SessionsController do
       it 'triggers a flash message welcoming user' do
         expect(flash[:message]).to have_content "Welcome #{@user.username}"
       end
-
-
     end
+  end
+
+
+  describe 'when unsuccessful' do
+    it 'redirects user to root path' do
+      post :create, session: { username: nil, password: nil }
+      expect(response).to redirect_to root_path
+    end
+
+
   end
 
 end
