@@ -31,6 +31,21 @@ class QuestionsController < ApplicationController
     @comment = Comment.new
   end
 
+  def new
+    @question = Question.new
+  end
+
+  def create
+    question = Question.new(question_params.merge(submitter: current_user))
+
+    if question.save
+      redirect_to question_path(question)
+    else
+      redirect_to new_question_path, flash: {error: "Your question must include both a title & content."}
+    end
+
+  end
+
 
 
 end
