@@ -51,6 +51,25 @@ describe AnswersController do
       get :edit, :id => answer.id
       expect(response).to be_success
     end
+
+    it "assigns answer" do
+      get :edit, :id => answer.id
+      expect(assigns(:answer)).to eq answer
+    end
+  end
+
+  context "#update" do
+    it "with valid attributes" do
+      expect {
+        put :update, :id => answer.id, :answer => { :text => "Updated Answer" }
+      }.to change {answer.reload.text}.from(answer.text).to("Updated Answer")
+    end
+
+    it "without valid attributes" do
+      expect {
+        put :update, :id => answer.id, :answer => { :text => " " }
+      }.to_not change {answer.reload.text}
+    end
   end
 
   context "#destroy" do
