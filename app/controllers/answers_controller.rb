@@ -15,7 +15,7 @@ class AnswersController < ApplicationController
     if answer.save
       redirect_to question_path(@question)
     else
-      rednder :partial => 'shared/errors', flash: {error: "Your answer must include text."}
+      render :partial => 'shared/errors', flash: {error: "Your answer must include text."}
     end
   end
 
