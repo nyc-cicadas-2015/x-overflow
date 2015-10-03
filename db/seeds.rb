@@ -5,13 +5,12 @@ domingo = User.create(username: "dj-m", password: "yoyoyo123")
 10.times do
   new_users = User.create(username: Faker::Internet.user_name, password: "securepassword")
   5.times do
-    new_questions = new_user.questions.create(text: Faker::Hacker.say_something_smart)
+    new_questions = new_user.questions.create(title: Faker::Hacker.say_something_smart, text: Faker::Lorem.paragraph)
     3.times do
-      new_questions.answers.create(text: )
-
+      new_questions.answers.create(text: Faker::Hacker.say_something_smart)
+    end
   end
 end
-
 
 q1 = dian.questions.create(title: "Why am I not a mutant and how can I become one?", text: "I really don't understand why I can't become one... I want to be a mutant so bad")
 q2 = julianna.questions.create(title: "How can I help all the mutant children?", text: "How can I help them? those special souls")
