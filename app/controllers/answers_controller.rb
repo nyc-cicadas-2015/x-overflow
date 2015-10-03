@@ -19,6 +19,12 @@ class AnswersController < ApplicationController
     end
   end
 
+  def destroy
+    answer = Answer.find(params[:id])
+    answer.destroy
+    redirect_to root_path
+  end
+
   private
 
   def answers_params

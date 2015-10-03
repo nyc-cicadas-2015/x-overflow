@@ -42,7 +42,16 @@ describe AnswersController do
     xit "without valid attributes" do
       expect {
         post :create, :user_id => user.id, :question_id => question.id, :answer => { :text => nil }
+        expect(response.status).to eq 422
       }.to_not change {Answer.count}
+    end
+  end
+
+  context "#destroy" do
+    it "deletes the answer" do
+      expect{
+        delete :destroy, id: answer
+      }.to change {Answer.count}.by(-1)
     end
   end
 end
