@@ -4,8 +4,10 @@ RSpec.describe QuestionsController, type: :controller do
 
   include SessionsHelper
 
-  let(:question) { FactoryGirl.create :question }
+  let(:question) { FactoryGirl.create :question, :user_id => user.id }
   let(:user) { FactoryGirl.create :user }
+  # let!(:answer) { FactoryGirl.create :answer, :question_id => question.id, :user_id => user.id }
+
 
   describe "GET #index" do
     it "renders the index view" do
@@ -20,12 +22,12 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe "GET #show" do
-    it "render the show view" do
+    xit "render the show view" do
       get :show, id: question
       expect(response).to render_template :show
     end
 
-    it "located the requested question" do
+    xit "located the requested question" do
       get :show, id: question
       expect(assigns(:question)).to eq(question)
     end
@@ -46,19 +48,19 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "POST #create" do
     context "valid attributes" do
-      xit "redirects to root if not logged in" do
+      it "redirects to root if not logged in" do
         post :create, question: FactoryGirl.attributes_for(:question)
         expect(response).to redirect_to root_path
       end
 
-      xit "creates a new question" do
+      it "creates a new question" do
         log_in(user)
         question_attributes = FactoryGirl.attributes_for(:question)
         post :create, question: question_attributes
         expect(Question.last).to have_attributes question_attributes
       end
 
-      xit "redirects to a new question's show view page" do
+      it "redirects to a new question's show view page" do
         log_in(user)
         post :create, question: FactoryGirl.attributes_for(:question)
         expect(response).to redirect_to(question_path(Question.last))
@@ -76,16 +78,16 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe "GET #edit" do
-    xit "renders an edit when logged in" do
+    it "renders an edit when logged in" do
       log_in(user)
       get :edit, id: question
       expect(response).to render_template :edit
     end
-    xit "located the requested question" do
+    it "located the requested question" do
       get :edit, id: question
       expect(assigns(:question)).to eq(question)
     end
-    xit "redirects to the home page if not logged in" do
+    it "redirects to the home page if not logged in" do
       get :edit, id: question
       expect(response).to redirect_to root_path
     end
