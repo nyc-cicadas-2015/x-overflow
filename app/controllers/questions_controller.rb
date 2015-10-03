@@ -7,21 +7,9 @@ class QuestionsController < ApplicationController
     @questions = Question.order_by_recent
   end
 
-# def trending
-#     @question = Question.order_by_trending
-#     render :index
-#   end
-
-#   def votes
-#     @questions = Question.order_by_votes
-#     render :index
-#   end
-
-#   def search
-#     @questions = Question.where("title ILOOK ?", "%#{params[:search]}%")
-#     @questions.order_by_recent
-#     render :index
-#   end
+  def new
+    @question = Question.new
+  end
 
   def show
     @comments = @questions.comments
@@ -31,9 +19,6 @@ class QuestionsController < ApplicationController
     @comment = Comment.new
   end
 
-  def new
-    @question = Question.new
-  end
 
   def create
     question = Question.new(question_params.merge(submitter: current_user))
@@ -61,6 +46,22 @@ class QuestionsController < ApplicationController
     @question.destroy
     redirect_to root_path
   end
+
+# def trending
+#     @question = Question.order_by_trending
+#     render :index
+#   end
+
+#   def votes
+#     @questions = Question.order_by_votes
+#     render :index
+#   end
+
+#   def search
+#     @questions = Question.where("title ILOOK ?", "%#{params[:search]}%")
+#     @questions.order_by_recent
+#     render :index
+#   end
 
   private
 

@@ -30,13 +30,13 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe "GET #new" do
-    xit "renders the new view when logged in" do
+    it "renders the new view when logged in" do
       log_in(user)
       get :new
       expect(response).to render_template :new
     end
 
-    xit "redirects to root if not logged in" do
+    it "redirects to root if not logged in" do
       get :new
       expect(response).to redirect_to root_path
     end
