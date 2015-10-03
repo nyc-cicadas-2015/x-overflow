@@ -7,9 +7,6 @@ class QuestionsController < ApplicationController
     @questions = Question.order_by_recent
   end
 
-  def new
-    @question = Question.new
-  end
 
   def show
     @comments = @questions.comments
@@ -19,9 +16,12 @@ class QuestionsController < ApplicationController
     @comment = Comment.new
   end
 
+  def new
+    @question = Question.new
+  end
 
   def create
-    question = Question.new(question_params.merge(submitter: current_user))
+    question = Question.new(question_params.merge(user: current_user))
 
     if question.save
       redirect_to question_path(question)
