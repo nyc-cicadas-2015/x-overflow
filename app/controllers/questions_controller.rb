@@ -79,8 +79,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
-  def authenticate_user
-    redirect_to root_path if !current_user
-  end
+  # def authenticate_user
+  #   redirect_to root_path if !current_user
+  # end
 
 end
