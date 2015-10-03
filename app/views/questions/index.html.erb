@@ -1,9 +1,9 @@
-<h1 class="q-header title">Questions</h1>
+<h1 class="question-header title">Questions</h1>
 
 <hr>
 
-<% if @question.empty? %>
-<p>There are no questions to show.</p>
+<% if @questions.empty? %>
+  <p>There are no questions to show.</p>
 <% end %>
 
 <% @questions.each do |question| %>

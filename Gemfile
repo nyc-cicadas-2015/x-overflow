@@ -39,6 +39,10 @@ gem 'bcrypt'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 group :development, :test do
   gem 'capybara'
   gem 'pry'
