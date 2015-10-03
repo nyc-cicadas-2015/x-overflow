@@ -1,4 +1,5 @@
 <%= form_for @question do |f| %>
-  Text: <%= f.text_field :text %><br>
+  Title: <%= f.text_field :title %><br>
+  <%= f.text_field :text %>
   <%= f.submit "Submit" %>
 <% end %>
