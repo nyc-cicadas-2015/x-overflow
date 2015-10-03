@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Vote, type: :model do
+describe Vote do
   context 'contains valid data' do
-    it { expect(subject).to validate_presence_of(:value) }
-    it { expect(subject).to validate_inclusion_of(:value).in_array([1, -1]) }
+    it { should validate_presence_of :votable_direction }
+    it { expect(subject).to validate_inclusion_of(:votable_direction).in_array([1, -1]) }
   end
 
   context 'has correct associations' do
