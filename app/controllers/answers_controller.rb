@@ -24,6 +24,15 @@ class AnswersController < ApplicationController
     render :partial => 'form', :locals => { :answer => @answer }
   end
 
+  def update
+    @answer = Answer.find(params[:id])
+    if @answer.update_attributes answers_params
+      redirect_to answer_path(@answer)
+    else
+      render :partial => 'shared/errors'
+    end
+  end
+
   def destroy
     answer = Answer.find(params[:id])
     answer.destroy

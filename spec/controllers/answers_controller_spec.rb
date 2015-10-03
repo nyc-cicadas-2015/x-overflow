@@ -58,6 +58,20 @@ describe AnswersController do
     end
   end
 
+  context "#update" do
+    it "with valid attributes" do
+      expect {
+        put :update, :id => answer.id, :answer => { :text => "Updated Answer" }
+      }.to change {answer.reload.text}.from(answer.text).to("Updated Answer")
+    end
+
+    it "without valid attributes" do
+      expect {
+        put :update, :id => answer.id, :answer => { :text => " " }
+      }.to_not change {answer.reload.text}
+    end
+  end
+
   context "#destroy" do
     it "deletes the answer" do
       expect{
