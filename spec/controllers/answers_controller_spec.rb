@@ -51,6 +51,11 @@ describe AnswersController do
       get :edit, :id => answer.id
       expect(response).to be_success
     end
+
+    it "assigns answer" do
+      get :edit, :id => answer.id
+      expect(assigns(:answer)).to eq answer
+    end
   end
 
   context "#destroy" do

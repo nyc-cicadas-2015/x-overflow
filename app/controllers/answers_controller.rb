@@ -20,6 +20,7 @@ class AnswersController < ApplicationController
   end
 
   def edit
+    @answer = Answer.find(params[:id])
     render :partial => 'form', :locals => { :answer => @answer }
   end
 
