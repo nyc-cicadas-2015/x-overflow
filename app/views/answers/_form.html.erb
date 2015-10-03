@@ -1,0 +1,5 @@
+<%= form_for @answer, :remote => true do |f| %>
+  <%= f.label :text %>
+  <%= f.text_field :text %>
+  <%= f.submit "Add" %>
+<% end %>

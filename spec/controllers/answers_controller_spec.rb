@@ -47,6 +47,13 @@ describe AnswersController do
     end
   end
 
+  context "#edit" do
+    it "is successful" do
+      get :edit, :id => answer.id
+      expect(response).to be_success
+    end
+  end
+
   context "#destroy" do
     it "deletes the answer" do
       expect{

@@ -19,6 +19,10 @@ class AnswersController < ApplicationController
     end
   end
 
+  def edit
+    render :partial => 'form', :locals => { :answer => @answer }
+  end
+
   def destroy
     answer = Answer.find(params[:id])
     answer.destroy
