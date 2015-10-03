@@ -8,4 +8,20 @@ class Question < ActiveRecord::Base
     self.order(created_at: :desc)
   end
 
+  def votes_per_hour
+    votes.select {|vote| vote.created_at < 1.hour.ago}.count
+  end
+
+  def self.order_by_trending
+    self.all.sort {|q1, q2| q2.votes_per_hour <=> q1.votes_per_hour}
+  end
+
+  def self.order_by_votes
+    self.all.sort {|q1, q2| q2.rating <=> q1.rating}
+  end
+
+  def rating
+    votes.pluck(:value).reduce(:+) || 0
+  end
+
 end

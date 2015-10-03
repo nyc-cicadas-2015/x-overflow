@@ -4,8 +4,10 @@ RSpec.describe QuestionsController, type: :controller do
 
   include SessionsHelper
 
-  let(:question) { FactoryGirl.create :question }
+  let(:question) { FactoryGirl.create :question, :user_id => user.id }
   let(:user) { FactoryGirl.create :user }
+  # let!(:answer) { FactoryGirl.create :answer, :question_id => question.id, :user_id => user.id }
+
 
   describe "GET #index" do
     it "renders the index view" do
@@ -46,19 +48,19 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "POST #create" do
     context "valid attributes" do
-      xit "redirects to root if not logged in" do
+      it "redirects to root if not logged in" do
         post :create, question: FactoryGirl.attributes_for(:question)
         expect(response).to redirect_to root_path
       end
 
-      xit "creates a new question" do
+      it "creates a new question" do
         log_in(user)
         question_attributes = FactoryGirl.attributes_for(:question)
         post :create, question: question_attributes
         expect(Question.last).to have_attributes question_attributes
       end
 
-      xit "redirects to a new question's show view page" do
+      it "redirects to a new question's show view page" do
         log_in(user)
         post :create, question: FactoryGirl.attributes_for(:question)
         expect(response).to redirect_to(question_path(Question.last))
@@ -68,7 +70,7 @@ RSpec.describe QuestionsController, type: :controller do
     context "invalid attributes" do
       xit "doesn't create a post with invalid attributes" do
         log_in(FactoryGirl.create(:user))
-        question_attributes = { text: nil }
+        question_attributes = { title: "Title", text: nil }
         post :create, question: question_attributes
         expect(response).to redirect_to new_question_path
       end
@@ -76,16 +78,16 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe "GET #edit" do
-    xit "renders an edit when logged in" do
+    it "renders an edit when logged in" do
       log_in(user)
       get :edit, id: question
       expect(response).to render_template :edit
     end
-    xit "located the requested question" do
+    it "located the requested question" do
       get :edit, id: question
       expect(assigns(:question)).to eq(question)
     end
-    xit "redirects to the home page if not logged in" do
+    it "redirects to the home page if not logged in" do
       get :edit, id: question
       expect(response).to redirect_to root_path
     end
@@ -93,7 +95,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "PUT #update" do
     before :each do
-      @question = FactoryGirl.create(:question, text: "Text")
+      @question = FactoryGirl.create(:question, title: "Title", text: "Text")
     end
 
     context "valid attributes" do
@@ -104,9 +106,9 @@ RSpec.describe QuestionsController, type: :controller do
 
       xit "changes the question's attributes" do
         log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: "Updated text")
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: "Updated title")
         @question.reload
-        expect(@question.text).to eq("Updated text")
+        expect(@question.title).to eq("Updated title")
       end
 
       xit "redirects to the updated question" do
@@ -124,14 +126,14 @@ RSpec.describe QuestionsController, type: :controller do
 
       xit "does not change the the question's attributes" do
         log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: nil)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: nil)
         @question.reload
-        expect(@question.text).to eq("Text")
+        expect(@question.title).to eq("Title")
       end
 
       xit "redirects to the edit view" do
         log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: nil)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: nil)
         expect(response).to redirect_to edit_question_path(@question)
       end
     end
