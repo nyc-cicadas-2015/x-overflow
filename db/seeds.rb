@@ -3,20 +3,23 @@ julianna = User.create(username: "queenB", password: "abc123")
 domingo = User.create(username: "dj-m", password: "yoyoyo123")
 
 10.times do
-  new_user = User.create(username: Faker::Internet.user_name, password: "securepassword")
+  new_users = User.create(username: Faker::Internet.user_name, password: "securepassword")
   5.times do
-    new_user.questions.create(text: Faker::Hacker.say_something_smart)
+    new_questions = new_user.questions.create(text: Faker::Hacker.say_something_smart)
+    3.times do
+      new_questions.answers.create(text: )
+
   end
 end
 
 
-q1 = dian.questions.create(text: "Why am I not a mutant and how can I become one?")
-q2 = julianna.questions.create(text: "How can I help all the mutant children?")
-q3 = domingo.questions.create(text: "How can I get Storm to notice me?")
-q4 = dian.questions.create(text: "Why can't Wolverine die?")
-q5 = julianna.questions.create(text: "Why aren't Wolverine's claws still bone in the future?")
-q6 = domingo.questions.create(text: "How did Magneto get his powers back?")
-q7 = dian.questions.create(text: "Soooo... is Mystique good or bad?")
-q8 = julianna.questions.create(text: "Does Professor X actually die?")
-q9 = domingo.questions.create(text: "How does Cyclops see anything?")
-q10 = dian.questions.create(text: "What's the big deal about Jean Grey? Why does Is the rivalry between Cyclops and Wolverine p")
+q1 = dian.questions.create(title: "Why am I not a mutant and how can I become one?", text: "I really don't understand why I can't become one... I want to be a mutant so bad")
+q2 = julianna.questions.create(title: "How can I help all the mutant children?", text: "How can I help them? those special souls")
+q3 = domingo.questions.create(title: "How can I get Storm to notice me?", text: "She is seriously the best")
+q4 = dian.questions.create(title: "Why can't Wolverine die?", text: "Just hypothetically... how would one go about killing him?")
+q5 = julianna.questions.create(title: "Why aren't Wolverine's claws still bone in the future?", text: "Do they mature?")
+q6 = domingo.questions.create(title: "How did Magneto get his powers back?", text: "It's like ok, one day he loses them and then the next day he doesn't wtf mate...")
+q7 = dian.questions.create(title: "Soooo... is Mystique good or bad?", text: "Either way, she's really hot")
+q8 = julianna.questions.create(title: "Does Professor X actually die?", text: "I thought that he was killed by a fire but who knows...")
+q9 = domingo.questions.create(title: "How does Cyclops see anything?", text: "What the heck is up with those glasses he wears")
+q10 = dian.questions.create(title: "What's the big deal about Jean Grey?", text: "Seriously what is up with those hotties, Cyclops and Wolverine fighting over her")
