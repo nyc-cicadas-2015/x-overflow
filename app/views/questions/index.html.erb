@@ -1,1 +1,28 @@
-<h1>Some stuff!</h1>
+<h1 class="q-header title">Questions</h1>
+
+<hr>
+
+<% if @question.empty? %>
+<p>There are no questions to show.</p>
+<% end %>
+
+<% @questions.each do |question| %>
+<table>
+  <tr>
+    <td class="question-stats">
+      <%= question.answers.count %><br>
+      answers
+    </td>
+    <td class="question-stats">
+      <%= question.rating %><br>
+      votes
+    </td>
+    <td class="question-info">
+      <p class="question-text"><%= link_to question.text, question_path(question) %></p>
+      <p><%= question.text %></p>
+      <sub>asked <%= question.timestamp %> ago <%= link_to "#{question.user.username}", profile_path(question.user) %></sub>
+    </td>
+  </tr>
+</table>
+<hr>
+<%end%>
