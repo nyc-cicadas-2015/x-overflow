@@ -28,7 +28,6 @@ describe SessionsController do
     end
   end
 
-
   describe 'when unsuccessful' do
     it 'redirects user to root path' do
       post :create, session: { username: nil, password: nil }
@@ -43,6 +42,20 @@ describe SessionsController do
     it 'does not set the user session' do
       post :create, session: { username: nil, password: nil }
       expect(session[:user_id]).to be_nil
+    end
+  end
+
+  describe 'GET#destroy' do
+    before(:each) { session[:user_id] = create(:user).id }
+
+    it 'resets the user session' do
+      delete :destroy, id: :user_id
+      expect(session[:user_id]).to be_nil
+    end
+
+    it 'notifies user of successful logout' do
+      delete :destroy, id: :user_id
+      expect(flash[:message]).to have_content "You've been signed out"
     end
   end
 
