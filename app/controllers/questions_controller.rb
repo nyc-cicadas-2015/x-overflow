@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :find_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
+  # before_action :find_question, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @question = Question.new
@@ -8,7 +8,13 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+
+    if logged_in?
+      @question = Question.new
+    else
+      redirect_to root_path
+    end
+
   end
 
   def show
@@ -26,7 +32,7 @@ class QuestionsController < ApplicationController
     if question.save
       redirect_to question_path(question)
     else
-      redirect_to new_question_path, flash: {error: "Your question must include both a title & content."}
+      redirect_to new_question_path, flash: {error: "Your question must include text."}
     end
 
   end
@@ -38,7 +44,7 @@ class QuestionsController < ApplicationController
     if @question.update_attributes(question_params)
       redirect_to question_path(@question)
     else
-      redirect_to edit_question_path(@question), flash: {error: "Your question must include both a title & content"}
+      redirect_to edit_question_path(@question), flash: {error: "Your question must include text"}
     end
   end
 
