@@ -68,7 +68,7 @@ RSpec.describe QuestionsController, type: :controller do
     context "invalid attributes" do
       xit "doesn't create a post with invalid attributes" do
         log_in(FactoryGirl.create(:user))
-        question_attributes = { text: nil }
+        question_attributes = { title: "Title", text: nil }
         post :create, question: question_attributes
         expect(response).to redirect_to new_question_path
       end
@@ -93,7 +93,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "PUT #update" do
     before :each do
-      @question = FactoryGirl.create(:question, text: "Text")
+      @question = FactoryGirl.create(:question, title: "Title", text: "Text")
     end
 
     context "valid attributes" do
@@ -104,9 +104,9 @@ RSpec.describe QuestionsController, type: :controller do
 
       xit "changes the question's attributes" do
         log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: "Updated text")
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: "Updated title")
         @question.reload
-        expect(@question.text).to eq("Updated text")
+        expect(@question.title).to eq("Updated title")
       end
 
       xit "redirects to the updated question" do
@@ -124,14 +124,14 @@ RSpec.describe QuestionsController, type: :controller do
 
       xit "does not change the the question's attributes" do
         log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: nil)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: nil)
         @question.reload
-        expect(@question.text).to eq("Text")
+        expect(@question.title).to eq("Title")
       end
 
       xit "redirects to the edit view" do
         log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, text: nil)
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: nil)
         expect(response).to redirect_to edit_question_path(@question)
       end
     end
