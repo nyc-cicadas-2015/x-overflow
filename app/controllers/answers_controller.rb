@@ -10,12 +10,12 @@ class AnswersController < ApplicationController
 
   def create
     load_question
-    answer = @question.answers.build answers_params
+    answer = @question.answers.new(answers_params)
     answer.user_id = current_user.id
     if answer.save
       redirect_to question_path(@question)
     else
-      redirect_to new_answer_path, flash: {error: "Your comment must include text."}
+      redirect_to new_answer_path, flash: {error: "Your answer must include text."}
     end
   end
 

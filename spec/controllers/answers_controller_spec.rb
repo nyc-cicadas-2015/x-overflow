@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe AnswersController do
-   before(:each) { session[:user_id] = user.id }
+  before(:each) { session[:user_id] = user.id }
 
   let!(:user) { FactoryGirl.create :user }
   let!(:question) { FactoryGirl.create :question, :user_id => user.id }
@@ -37,6 +37,12 @@ describe AnswersController do
         post :create, :user_id => user.id, :question_id => question.id, :answer => attributes_for(:answer)
         expect(response).to be_redirect
       }.to change {Answer.count}.by(1)
+    end
+
+    xit "without valid attributes" do
+      expect {
+        post :create, :user_id => user.id, :question_id => question.id, :answer => { :text => nil }
+      }.to_not change {Answer.count}
     end
   end
 end
