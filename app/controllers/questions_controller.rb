@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  # before_action :find_question, only: [:show, :edit, :update, :destroy]
+  before_action :find_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:text)
+    params.require(:question).permit(:title, :text)
   end
 
   def find_question
