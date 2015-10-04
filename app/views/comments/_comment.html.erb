@@ -1,0 +1,4 @@
+<%= comment.text %><br/>
+  <% if current_user = comment.user_id %>
+    <%= button_to "Delete Comment", comment_path(comment), method: :delete %><br/>
+  <% end %>

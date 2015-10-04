@@ -1,3 +1,4 @@
+<h3>Here's an Answer</h3>
 <%= answer.text %><br/>
 by <%= answer.user.username %><br/>
   <% if current_user = answer.user_id %>
@@ -5,3 +6,13 @@ by <%= answer.user.username %><br/>
     <%= button_to "Delete Answer", answer_path(answer), method: :delete %><br/>
   <% end %>
 
+  <h4>Thoughts on this answer</h4>
+<%= form_for @comment do |f| %>
+ <%= f.hidden_field :commentable_id, value: answer.id %>
+ <%= f.hidden_field :commentable_type, value: "Answer" %>
+ <%= f.text_field :text %>
+ <%= f.submit "Submit" %>
+<% end %>
+  <% answer.comments.each do |comment| %>
+    <li><%= comment.text %></li>
+  <% end %>

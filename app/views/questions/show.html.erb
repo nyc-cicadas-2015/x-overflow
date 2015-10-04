@@ -5,13 +5,14 @@
 
   <% if current_user %>
     <%= render "answers/form" %>
+    <%= render "comments/form" %>
   <% else %>
     <p class='link'><%= link_to 'Login to answer', login_path %></p>
   <% end %>
 
 <% if !@question.comments.empty? %>
   <ul class="question-comments-list">
-    <%= render @comments %>
+    <%= render @comments.question_comments %>
   </ul>
   <% end %>
 <% if !@question.answers.empty? %>

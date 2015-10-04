@@ -1,0 +1,8 @@
+<h1>Comments:</h1>
+
+<%= form_for @comment do |f| %>
+ <%= f.hidden_field :commentable_id, value: @question.id %>
+ <%= f.hidden_field :commentable_type, value: "Question" %>
+ <%= f.text_field :text %>
+ <%= f.submit "Submit" %>
+<% end %>
