@@ -1,0 +1,7 @@
+<%= answer.text %><br/>
+by <%= answer.user.username %><br/>
+  <% if current_user = answer.user_id %>
+    <%= button_to "Edit Answer", edit_answer_path(answer.id), :method => :get %>
+    <%= button_to "Delete Answer", answer_path(answer), method: :delete %><br/>
+  <% end %>
+

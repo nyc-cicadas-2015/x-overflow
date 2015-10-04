@@ -1,6 +1,13 @@
 <main>
 
   <h1><%= @question.title %></h1>
+  <p><%= @question.text %></p>
+
+  <% if current_user %>
+    <%= render "answers/form" %>
+  <% else %>
+    <p class='link'><%= link_to 'Login to answer', login_path %></p>
+  <% end %>
 
 <% if !@question.comments.empty? %>
   <ul class="question-comments-list">
