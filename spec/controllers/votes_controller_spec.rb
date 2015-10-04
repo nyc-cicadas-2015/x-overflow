@@ -37,7 +37,7 @@ RSpec.describe VotesController, type: :controller do
 
   describe 'POST #create' do
     context 'with question params' do
-      xit 'adds a vote to a question' do
+      it 'adds a vote to a question' do
         create_question_upvote
         expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.votes.count}.by(1)
       end

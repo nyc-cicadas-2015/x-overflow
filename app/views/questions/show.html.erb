@@ -1,24 +1,18 @@
 <main>
 
-  <%= render @question %>
+  <h1><%= @question.title %></h1>
 
+<% if !@question.comments.empty? %>
   <ul class="question-comments-list">
     <%= render @comments %>
   </ul>
-
-  <% if logged_in? %>
-  <%= render partial:"comments/new", object: @comment %>
   <% end %>
-
-  <div class="answers">
-    <h2 class="subtitle"><%= @question.answers.count %> Answers</h2>
-    <hr>
+<% if !@question.answers.empty? %>
+  <ul class="question-comments-list">
     <%= render @answers %>
-  </div>
-
-  <% if logged_in? %>
-  <%= render partial:"answers/new", object: @answer %>
+  </ul>
   <% end %>
+
 
 </main>
 
