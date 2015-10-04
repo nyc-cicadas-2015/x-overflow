@@ -2,12 +2,16 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #FAF0E6;
+}
+
 #nav-bar {
   font-size: 14px;
   color: red;
   width: 100%;
-  background-color: #A9A9A9;
-  border: 2px solid black;
+  background-color: #FFFAFA;
+  border: 2px solid #FAFAFA;
   display: inline-block;
   text-align: right;
 }
@@ -18,8 +22,15 @@
 
 #link {
   display: inline;
+  text-decoration: none;
+  color; black;
 }
 
-#nav-bar, a {
+a:link {
   text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color:black;
 }
