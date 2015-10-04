@@ -21,13 +21,14 @@ class AnswersController < ApplicationController
 
   def edit
     @answer = Answer.find(params[:id])
-    render :partial => 'form', :locals => { :answer => @answer }
+    render '/answers/edit'
   end
 
   def update
     @answer = Answer.find(params[:id])
+    @question = Question.find(@answer[:question_id])
     if @answer.update_attributes answers_params
-      redirect_to answer_path(@answer)
+      redirect_to question_path(@question)
     else
       render :partial => 'shared/errors'
     end
@@ -46,7 +47,7 @@ class AnswersController < ApplicationController
   end
 
   def load_question
-    @question = Question.find(params[:question_id])
+    @question = Question.find(params[:answer][:question_id])
   end
 
 end
