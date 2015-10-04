@@ -1,8 +1,14 @@
-# class VotesController < ApplicationController
+class VotesController < ApplicationController
 
-#   def new
-#     @vote = Vote.new
-#   end
+  def create
+    @vote = Vote.create(user_id: params[:user_id], voteable_type: params[:votable_type], voteable_id: params[:voteable_id], votable_direction: params[:votable_direction])
+    if vote.voteable_type == "Question"
+      redirect_to question_path(id: vote.voteable_id)
+    else
+      redirect_to question_path(Comment.find(vote.voteable).commentable)
+    end
+
+  end
 
 #   def create
 #     if params[:question_id]
@@ -30,4 +36,4 @@
 #       params.require(:vote).permit(:question_id, :answer_id, :votable_direction)
 #     end
 
-# end
+end
