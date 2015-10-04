@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-   if params[:comment][:commentable_type]
+   if params[:comment][:commentable_type] == "Question"
      question = Question.find(params[:comment][:commentable_id])
      comment = question.comments.build(comment_params)
      comment.user_id = current_user.id
@@ -15,18 +15,18 @@ class CommentsController < ApplicationController
      else
        flash[:error] = "Your comment must include text"
      end
-
-   # elsif params[:answer_id]
-   #   @answer = Answer.find_by(id: params[:answer_id])
-   #   @comment = @answer.comments.build(comment_params.merge(user: current_user))
-   #   if comment.save
-   #     flash[:alert] = "Success! Your comment has saved!"
-   #   else
-   #     flash[:notice] = "Your comment must include text"
-   #   end
-   #   redirect_to question_path @answer.question
-    redirect_to question_path(question)
+   elsif params[:comment][:commentable_type] == "Answer"
+     answer = Answer.find(params[:comment][:commentable_id])
+     question = Question.find(answer.question_id)
+     comment = answer.comments.build(comment_params)
+     comment.user_id = current_user.id
+     if comment.save
+       flash[:alert] = "Success! Your comment has saved!"
+     else
+       flash[:notice] = "Your comment must include text"
+     end
    end
+    redirect_to question_path(question)
   end
 
   def destroy

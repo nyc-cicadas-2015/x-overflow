@@ -5,6 +5,14 @@ by <%= answer.user.username %><br/>
     <%= button_to "Edit Answer", edit_answer_path(answer.id), :method => :get %>
     <%= button_to "Delete Answer", answer_path(answer), method: :delete %><br/>
   <% end %>
-  <h4>Thoughts on this answer</h4>
-<%= render @comments %>
 
+  <h4>Thoughts on this answer</h4>
+<%= form_for @comment do |f| %>
+ <%= f.hidden_field :commentable_id, value: answer.id %>
+ <%= f.hidden_field :commentable_type, value: "Answer" %>
+ <%= f.text_field :text %>
+ <%= f.submit "Submit" %>
+<% end %>
+  <% answer.comments.each do |comment| %>
+    <li><%= comment.text %></li>
+  <% end %>

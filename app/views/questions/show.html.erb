@@ -12,7 +12,7 @@
 
 <% if !@question.comments.empty? %>
   <ul class="question-comments-list">
-    <%= render @comments %>
+    <%= render @comments.question_comments %>
   </ul>
   <% end %>
 <% if !@question.answers.empty? %>
