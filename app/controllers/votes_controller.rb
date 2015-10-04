@@ -27,7 +27,7 @@ class VotesController < ApplicationController
   def create
    if params[:vote][:votable_type] == "Question"
      @question = Question.find(params[:vote][:votable_id])
-     @vote = question.votes.build(cote_params)
+     @vote = question.votes.build(vote_params)
      @vote.user_id = current_user.id
      if @vote.save
        redirect_to question_path(@question)
