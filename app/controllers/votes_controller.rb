@@ -1,39 +1,56 @@
 class VotesController < ApplicationController
 
-  def create
-    @vote = Vote.create(user_id: params[:user_id], voteable_type: params[:votable_type], voteable_id: params[:voteable_id], votable_direction: params[:votable_direction])
-    if vote.voteable_type == "Question"
-      redirect_to question_path(id: vote.voteable_id)
-    else
-      redirect_to question_path(Comment.find(vote.voteable).commentable)
-    end
-
+  def new
+    @vote = Vote.new
   end
 
-#   def create
-#     if params[:question_id]
-#       @question = Question.find_by(id: params[:question_id])
-#       @vote = @question.votes.build(vote_params.merge(user: current_user))
-#       if @vote.save
-#         redirect_to question_path(@question)
-#       else
-#         flash[:notice] = 'Your vote has failed'
-#       end
-#     elsif params[:answer_id]
-#       @answer = Answer.find_by(id: params[:answer_id])
-#       @vote = @answer.votes.build(vote_params.merge(user: current_user))
-#       if @vote.save
-#         redirect_to question_path(@answer.question)
-#       else
-#         flash[:notice] = 'Your vote has failed'
-#       end
-#     end
-#   end
+  # def create
+  #   if params[:question_id]
+  #     @question = Question.find_by(id: params[:question_id])
+  #     @vote = @question.votes.build(vote_params.merge(user: current_user))
+  #     if @vote.save
+  #       redirect_to question_path(@question)
+  #     else
+  #       flash[:notice] = 'Your vote has failed'
+  #     end
+  #   elsif params[:answer_id]
+  #     @answer = Answer.find_by(id: params[:answer_id])
+  #     @vote = @answer.votes.build(vote_params.merge(user: current_user))
+  #     if @vote.save
+  #       redirect_to question_path(@answer.question)
+  #     else
+  #       flash[:notice] = 'Your vote has failed'
+  #     end
+  #   end
+  # end
 
-#   private
+  def create
+   if params[:vote][:votable_type] == "Question"
+     @question = Question.find(params[:vote][:votable_id])
+     @vote = question.votes.build(cote_params)
+     @vote.user_id = current_user.id
+     if @vote.save
+       redirect_to question_path(@question)
+     else
+       flash[:notice] = "Your vote has failed"
+     end
+   elsif params[:vote][:votable_type] == "Answer"
+     @answer = Answer.find(params[:vote][:votable_id])
+     @question = Question.find(answer.question_id)
+     @vote = answer.votes.build(vote_params)
+     @vote.user_id = current_user.id
+     if @vote.save
+       redirect_to question_path(@answer.question)
+     else
+       flash[:notice] = 'Your vote has failed'
+     end
+   end
+ end
 
-#     def vote_params
-#       params.require(:vote).permit(:question_id, :answer_id, :votable_direction)
-#     end
+  private
+
+  def vote_params
+    params.require(:vote).permit(:votable_direction)
+  end
 
 end
