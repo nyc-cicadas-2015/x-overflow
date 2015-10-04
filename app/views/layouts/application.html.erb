@@ -10,10 +10,11 @@
 
 <div id='nav-bar'>
   <h3><%= link_to 'X Overflow', root_path %></h3>
-  <p><%= link_to 'Sign up', new_user_path %></p>
   <% if current_user %>
+    <p><%= link_to 'Ask', new_question_path %></p>
     <p><%= link_to 'Logout', logout_path %></p>
   <% else %>
+  <p><%= link_to 'Sign up', new_user_path %></p>
     <p><%= link_to 'Login', login_path %></p>
   <% end %>
 </div>

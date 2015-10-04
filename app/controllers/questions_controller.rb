@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
 
   def show
-    @comments = @questions.comments
+    @comments = @question.comments
     @answers = @question.answers.includes(:comments)
     @vote = Vote.new
     @answer = Answer.new
@@ -47,21 +47,15 @@ class QuestionsController < ApplicationController
     redirect_to root_path
   end
 
-# def trending
-#     @question = Question.order_by_trending
-#     render :index
-#   end
+  def trending
+    @question = Question.order_by_trending
+    render :index
+  end
 
-#   def votes
-#     @questions = Question.order_by_votes
-#     render :index
-#   end
-
-#   def search
-#     @questions = Question.where("title ILOOK ?", "%#{params[:search]}%")
-#     @questions.order_by_recent
-#     render :index
-#   end
+  def votes
+    @questions = Question.order_by_votes
+    render :index
+  end
 
   private
 

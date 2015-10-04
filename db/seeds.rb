@@ -6,9 +6,6 @@ domingo = User.create!(username: "dj-m", password: "yoyoyo123")
   new_users = User.create!(username: Faker::Internet.user_name, password: "securepassword")
   5.times do
     new_questions = new_users.questions.create!(title: Faker::Hacker.say_something_smart, text: Faker::Lorem.paragraph)
-    3.times do
-      new_questions.answers.create!(text: Faker::Hacker.say_something_smart)
-    end
   end
 end
 

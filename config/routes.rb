@@ -8,7 +8,13 @@ Rails.application.routes.draw do
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  delete '/logout' => 'sessions#destroy', :via => :delete
+  get '/logout' => 'sessions#destroy', :via => :delete
+
+  get '/profile/:id' => 'users#show', as: 'profile'
+
+  get '/trending' => 'questions#trending'
+  get '/votes' => 'questions#votes'
+  get '/recent' => 'questions#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
