@@ -19,3 +19,16 @@ q7 = dian.questions.create!(title: "Soooo... is Mystique good or bad?", text: "E
 q8 = julianna.questions.create!(title: "Does Professor X actually die?", text: "I thought that he was killed by a fire but who knows...")
 q9 = domingo.questions.create!(title: "How does Cyclops see anything?", text: "What the heck is up with those glasses he wears")
 q10 = dian.questions.create!(title: "What's the big deal about Jean Grey?", text: "Seriously what is up with those hotties, Cyclops and Wolverine fighting over her")
+
+
+q1.comments.create!(text: "Whoa whoa whoa", user_id: julianna.id, commentable_id: q1.id, commentable_type: "Question")
+q1.comments.create!(text: "I'm not sure but I'll add you to my secret Mutant lover group on fb", user_id: domingo.id, commentable_id: q1.id, commentable_type: "Question")
+q1.comments.create!(text: "Can you add me too?", user_id: julianna.id, commentable_id: q1.id, commentable_type: "Question")
+q3.comments.create!(text: "Try bringing her flowers!", user_id: dian.id, commentable_id: q1.id, commentable_type: "Question")
+q3.comments.create!(text: "What a silly question", user_id: julianna.id, commentable_id: q1.id, commentable_type: "Question")
+
+q1.answers.create!(user_id: domingo.id, question_id: q1.id, text: "You need to be happy with who you are, stop wishing you were someone different")
+q1.answers.create!(user_id: domingo.id, question_id: q1.id, text: "Just popping in to say hello")
+q5.answers.create!(user_id: dian.id, question_id: q1.id, text: "That's a really great question, I never thought about it before")
+q5.answers.create!(user_id: domingo.id, question_id: q1.id, text: "It's a mystery man")
+
