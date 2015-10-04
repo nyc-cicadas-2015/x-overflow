@@ -96,6 +96,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe "PUT #update" do
     before :each do
       @question = FactoryGirl.create(:question, title: "Title", text: "Text")
+      log_in(user)
     end
 
     context "valid attributes" do
@@ -105,10 +106,9 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it "changes the question's attributes" do
-        log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: "Updated title")
+        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: "Updated Title")
         @question.reload
-        expect(@question.title).to eq("Updated title")
+        expect(@question.title).to eq("Updated Title")
       end
 
       it "redirects to the updated question" do

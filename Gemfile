@@ -41,6 +41,7 @@ gem 'bcrypt'
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
@@ -49,5 +50,4 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'faker'
-  gem 'database_cleaner'
 end
