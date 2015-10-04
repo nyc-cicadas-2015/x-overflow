@@ -99,19 +99,19 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     context "valid attributes" do
-      xit "located the specific question" do
+      it "located the specific question" do
         put :update, id: @question
         expect(assigns(:question)).to eq(@question)
       end
 
-      xit "changes the question's attributes" do
+      it "changes the question's attributes" do
         log_in(user)
         put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: "Updated title")
         @question.reload
         expect(@question.title).to eq("Updated title")
       end
 
-      xit "redirects to the updated question" do
+      it "redirects to the updated question" do
         log_in(user)
         put :update, id: @question, question: FactoryGirl.attributes_for(:question)
         expect(response).to redirect_to root_path
