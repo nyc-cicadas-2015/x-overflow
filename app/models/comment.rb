@@ -10,4 +10,8 @@ class Comment < ActiveRecord::Base
     where(:commentable_type => "Answer")
   end
 
+  def rating
+    votes.pluck(:votable_direction).reduce(:+) || 0
+  end
+
 end

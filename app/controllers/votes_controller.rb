@@ -3,12 +3,14 @@ class VotesController < ApplicationController
   def new
     @vote = Vote.new
     @question = Question.find_by(id: params[:question_id])
+    @answer = @question.answers.find(params[:answer_id])
   end
 
   def index
   end
 
   def create
+
    if params[:vote][:votable_type] == "Question"
      question = Question.find(params[:vote][:votable_id])
      vote = question.votes.build(vote_params)
@@ -28,7 +30,7 @@ class VotesController < ApplicationController
      else
        flash[:notice] = 'Your vote has failed'
      end
-  else
+   else
       redirect_to question_path(question)
    end
  end
@@ -37,6 +39,10 @@ class VotesController < ApplicationController
 
   def vote_params
     params.require(:vote).permit(:votable_direction)
+  end
+
+  def load_question
+    @question = Question.find(params[:answer][:question_id])
   end
 
 end
