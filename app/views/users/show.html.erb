@@ -1,1 +1,19 @@
-<h1>your Profile</h1>
+<h1><%= @user.username %>'s profile</h1>
+
+<h2>Questions asked:</h2>
+<% if current_user.id == @question.user_id %>
+  <ul><%= link_to @question.title, question_path(@question) %></ul>
+<% end %>
+
+<h2>Answers:</h2>
+<% if current_user.id == @answer.user_id %>
+  <ul><%= @answer.text %> [Question: <% if @answer.question_id == @question.id %><%= @question.title %><% end %>]</ul>
+<% end %>
+
+<h2>Comments:</h2>
+<% if current_user.id == @comment.user_id %>
+  <ul><%= @comment.text %> [Question: <%= %>]</ul>
+<% end %>
+
+
+
