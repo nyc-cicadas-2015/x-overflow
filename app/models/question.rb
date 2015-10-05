@@ -7,7 +7,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :text, :title
 
   def self.order_by_recent
-    order(created_at: :desc)
+    self.order(created_at: :desc)
   end
 
   def votes_per_hour
@@ -15,11 +15,11 @@ class Question < ActiveRecord::Base
   end
 
   def self.order_by_trending
-    all.sort {|q1, q2| q2.votes_per_hour <=> q1.votes_per_hour}
+    self.all.sort {|q1, q2| q2.votes_per_hour <=> q1.votes_per_hour}
   end
 
   def self.order_by_votes
-    all.sort {|q1, q2| q2.rating <=> q1.rating}
+    self.all.sort {|q1, q2| q2.rating <=> q1.rating}
   end
 
   def rating

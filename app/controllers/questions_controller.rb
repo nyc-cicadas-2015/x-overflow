@@ -3,7 +3,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @questions = Question.all.order(id: :desc) || []
+    @question = Question.new
+    @questions = Question.order_by_recent
   end
 
   def trending

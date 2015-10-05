@@ -1,4 +1,4 @@
-<h1><%= question.title %></h1>
+<!-- <h1><%= question.title %></h1> -->
 <table>
   <tr>
     <td>
@@ -12,7 +12,6 @@
           <%= form_for @vote do |f| %>
             <%= f.hidden_field :votable_id, value: 1 %>
             <%= image_submit_tag("up-arrow.png", class: "vote") %>
-            <input type="image" src="<%= image_path("up-arrow.png") %>" alt="submit"/>
           <% end %>
         </div>
 
@@ -35,7 +34,7 @@
      </div>
     </td>
     <td>
-      <p class="question-content"><%= question.text %></p>
+      <!-- <p class="question-content"><%= question.text %></p> -->
     </td>
   </tr>
 </table>
