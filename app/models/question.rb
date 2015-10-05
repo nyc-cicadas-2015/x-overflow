@@ -4,6 +4,8 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
 
+  validates_presence_of :text, :title
+
   def self.order_by_recent
     self.order(created_at: :desc)
   end
