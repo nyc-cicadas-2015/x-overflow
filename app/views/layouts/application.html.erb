@@ -8,8 +8,10 @@
 </head>
 <body>
 
-<div id='nav-bar'>
+<div>
+  <header>
   <h3 id='logo'><%= link_to 'X Overflow', root_path %></h3>
+  </header>
 
   <nav class="question-links">
     <%= link_to "Recent", recent_path, class: "sub-button" %>
@@ -18,17 +20,21 @@
   </nav>
 
   <% if current_user %>
-    <p class='link'><%= link_to 'Ask', new_question_path %></p>
-    <p class='link'><%= link_to 'Logout', logout_path %></p>
+    <p class='link-a'><%= link_to 'Ask', new_question_path %></p>
+    <p class='link-b'><%= link_to 'Logout', logout_path %></p>
   <% else %>
-    <p class='link'><%= link_to 'Sign up', new_user_path %></p>
-    <p class='link'><%= link_to 'Login', login_path %></p>
+    <p class='link-c'><%= link_to 'Sign up', new_user_path %></p>
+    <p class='link-d'><%= link_to 'Login', login_path %></p>
   <% end %>
 </div>
 
 <div id='content'>
   <%= yield %>
 </div>
+
+<footer>
+  <p>Designed by Team Dian   |   Domingo   |   Julianna</p>
+</footer>
 
 </body>
 </html>
