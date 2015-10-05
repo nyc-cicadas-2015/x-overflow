@@ -21,17 +21,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    xit "render the show view" do
-      get :show, id: question
-      expect(response).to render_template :show
-    end
-
-    xit "located the requested question" do
-      get :show, id: question
-      expect(assigns(:question)).to eq(question)
-    end
-  end
 
   describe "GET #new" do
     it "renders the new view when logged in" do
@@ -67,14 +56,6 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
 
-    context "invalid attributes" do
-      xit "doesn't create a post with invalid attributes" do
-        log_in(FactoryGirl.create(:user))
-        question_attributes = { title: "Title", text: nil }
-        post :create, question: question_attributes
-        expect(response).to redirect_to new_question_path
-      end
-    end
   end
 
   describe "GET #edit" do
@@ -92,88 +73,5 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to redirect_to root_path
     end
   end
-
-  describe "PUT #update" do
-    before :each do
-      @question = FactoryGirl.create(:question, title: "Title", text: "Text")
-      log_in(user)
-    end
-
-    context "valid attributes" do
-      xit "located the specific question" do
-        put :update, id: @question
-        expect(assigns(:question)).to eq(@question)
-      end
-
-      xit "changes the question's attributes" do
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: "Updated Title")
-        @question.reload
-        expect(@question.title).to eq("Updated Title")
-      end
-
-      xit "redirects to the updated question" do
-        log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question)
-        expect(response).to redirect_to root_path
-      end
-    end
-
-    context "invalid attributes" do
-      xit "locates the requested question" do
-        put :update, id: @question
-        expect(assigns(:question)).to eq(@question)
-      end
-
-      xit "does not change the the question's attributes" do
-        log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: nil)
-        @question.reload
-        expect(@question.title).to eq("Title")
-      end
-
-      xit "redirects to the edit view" do
-        log_in(user)
-        put :update, id: @question, question: FactoryGirl.attributes_for(:question, title: nil)
-        expect(response).to redirect_to edit_question_path(@question)
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    before :each do
-      @question = FactoryGirl.create(:question)
-    end
-
-    xit "redirects to the root page if not logged in" do
-      delete :destroy, id: @question
-      expect(response).to redirect_to root_path
-    end
-
-    xit "does not delete question when not logged in" do
-      expect(
-        delete :destroy, id: @question
-        ).not_to change(Question, :count)
-    end
-
-    xit "located the requested question" do
-      log_in(user)
-      delete :destroy, id: @question
-      expect(assigns(:question)).to eq(@question)
-    end
-
-    xit "deletes the question" do
-      log_in(user)
-      expect(
-        delete :destroy, id: @question
-        ).to change(Question, :count).by(-1)
-    end
-
-    xit "redirects to home page when the question is deleted" do
-      log_in(user)
-      delete :destroy, id: @question
-      expect(response).to redirect_to(root_path)
-    end
-  end
-
 
 end
