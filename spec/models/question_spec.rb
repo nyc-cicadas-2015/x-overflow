@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
+  # Nice!  Test your validation code is what is expected.
+  # These two blocks are good examples of what to test on your AR models
   context 'contains valid data' do
+    # subject { User.new }
     it { expect(subject).to validate_presence_of(:text) }
     it { expect(subject).to validate_presence_of(:title) }
   end

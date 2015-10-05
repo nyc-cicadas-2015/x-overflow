@@ -10,7 +10,8 @@ class VotesController < ApplicationController
   end
 
   def create
-
+    # Consider doing a refactor here, similar to that which I did for CommentsController
+    #
    if params[:vote][:votable_type] == "Question"
      question = Question.find(params[:vote][:votable_id])
      vote = question.votes.build(vote_params)

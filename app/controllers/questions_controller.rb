@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
 
   def show
     @comments = @question.comments
-    @answers = @question.answers.includes(:comments)
+    @answers = @question.answers.includes(:comments) # YAY for includes!q
     @vote = Vote.new
     @answer = Answer.new
     @comment = Comment.new

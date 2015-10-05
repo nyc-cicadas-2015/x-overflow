@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe AnswersController do
+  # I posit that you may desire to test that this controller functions as you
+  # expect when not logged in as well.  Perhaps having a separate context for
+  # logged in expectations vs not
   before(:each) { session[:user_id] = user.id }
 
   let!(:user) { FactoryGirl.create :user }

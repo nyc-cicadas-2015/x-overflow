@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//
+//  Why is this here?  Did you make a new rails using --skip-turbolinks?
+//
 //= require turbolinks
 //= require_tree .

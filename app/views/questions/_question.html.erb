@@ -8,6 +8,10 @@
       <% end %>
 
       <% if logged_in? %>
+      <!--
+      I feel like I keep seeing this form for voting everywhere.  Can you
+      refactor it to a partial??
+      -->
         <div class='upvote'>
           <%= form_for @vote do |f| %>
             <%= f.hidden_field :votable_direction, :value => 1 %>
