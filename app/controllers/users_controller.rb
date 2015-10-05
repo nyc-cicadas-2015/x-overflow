@@ -5,9 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @question = Question.find_by(user_id: @user.id)
-    @comment = Comment.find_by(user_id: @user.id)
-    @answer = Answer.find_by(user_id: @user.id)
   end
 
   def create
