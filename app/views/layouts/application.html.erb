@@ -10,6 +10,13 @@
 
 <div id='nav-bar'>
   <h3 id='logo'><%= link_to 'X Overflow', root_path %></h3>
+
+  <nav class="question-links">
+    <%= link_to "Recent", recent_path, class: "sub-button" %>
+    <%= link_to "Popular", votes_path, class: "sub-button" %>
+    <%= link_to "Trending", trending_path, class: "sub-button" %>
+  </nav>
+
   <% if current_user %>
     <p class='link'><%= link_to 'Ask', new_question_path %></p>
     <p class='link'><%= link_to 'Logout', logout_path %></p>
