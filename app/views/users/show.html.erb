@@ -1,1 +1,19 @@
-<h1>your Profile</h1>
+<h1><%= @user.username %>'s profile</h1>
+
+<h2>Questions asked:</h2>
+<% @user.questions.each do |question| %>
+  <ul><%= link_to question.title, question_path(question) %></ul>
+<% end %>
+
+<h2>Answers:</h2>
+<% @user.answers.each do |answer| %>
+  <ul><%= answer.text %></ul>
+<% end %>
+
+<h2>Comments:</h2>
+<% @user.comments.each do |comment| %>
+  <ul><%= comment.text %></ul>
+<% end %>
+
+
+
