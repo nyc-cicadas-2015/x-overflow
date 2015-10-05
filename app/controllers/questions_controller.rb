@@ -3,10 +3,18 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @question = Question.new
-    @questions = Question.order_by_recent
+    @questions = Question.all.order(id: :desc) || []
   end
 
+  def trending
+    @question = Question.order_by_trending
+    render :index
+  end
+
+  def votes
+    @questions = Question.order_by_votes
+    render :index
+  end
 
   def show
     @comments = @question.comments
@@ -31,9 +39,6 @@ class QuestionsController < ApplicationController
 
   end
 
-  def edit
-  end
-
   def update
     if @question.update_attributes(question_params)
       redirect_to question_path(@question)
@@ -47,15 +52,6 @@ class QuestionsController < ApplicationController
     redirect_to root_path
   end
 
-  def trending
-    @question = Question.order_by_trending
-    render :index
-  end
-
-  def votes
-    @questions = Question.order_by_votes
-    render :index
-  end
 
   private
 
